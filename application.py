@@ -1,12 +1,16 @@
-import os
-
-from flask import Flask, session
-from flask_session import Session
-from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
+from sqlalchemy import create_engine
+from flask_session import Session
+from flask import Flask, session
+import os
+import requests
+res = requests.get("https://www.goodreads.com/book/review_counts.json",
+                   params={"key": "KEY", "isbns": "9781632168146"})
+
 
 app = Flask(__name__)
 os.environ["DATABASE_URL"] = "postgres://ukbwquwkkrusjs:f7b77b830c7bc72df39a6c200b69bda32a0f381b225508a849b842784e230157@ec2-52-87-135-240.compute-1.amazonaws.com:5432/d9jpnfbvjl7tkt"
+
 
 # Check for environment variable
 if not os.getenv("DATABASE_URL"):
