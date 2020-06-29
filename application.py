@@ -4,8 +4,6 @@ from flask_session import Session
 from flask import Flask, session
 import os
 import requests
-res = requests.get("https://www.goodreads.com/book/review_counts.json",
-                   params={"key": "KEY", "isbns": "9781632168146"})
 
 
 app = Flask(__name__)
@@ -28,4 +26,7 @@ db = scoped_session(sessionmaker(bind=engine))
 
 @app.route("/")
 def index():
+    res = requests.get("https://www.goodreads.com/book/review_counts.json",
+                       params={"key": "lRj6fWPLwTIg0B84ShylA", "isbns": "9781632168146"})
+    print(res.json())
     return "Project 1: TODO"
